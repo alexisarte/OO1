@@ -1,15 +1,11 @@
 package ar.edu.unlp.info.oo1.ejercicio2_balanzaElectronica;
 
-/**
- * Producto
- *
- */
 public class Producto {
 
 	private double peso;
 	private double precioPorKilo;
 	private String descripcion;
-	
+
 	public double getPeso() {
 		return peso;
 	}
@@ -38,5 +34,5 @@ public class Producto {
 		double x = this.peso * this.precioPorKilo;
 		return x;
 	}
-	
+
 }
