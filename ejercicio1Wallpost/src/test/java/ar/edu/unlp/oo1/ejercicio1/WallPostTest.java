@@ -1,11 +1,9 @@
 package ar.edu.unlp.oo1.ejercicio1;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ar.edu.unlp.oo1.ejercicio1.impl.WallPostImpl;
 
@@ -15,14 +13,14 @@ import ar.edu.unlp.oo1.ejercicio1.impl.WallPostImpl;
  * @author ramiro
  *
  */
-public class WallPostTest {
+class WallPostTest {
 
   WallPost wallPost;
   
   WallPost coolPost;
   
-  @Before
-  public void setUp() throws Exception {
+  @BeforeEach
+  void setUp() throws Exception {
     wallPost = new WallPostImpl();
     coolPost = new WallPostImpl()
         .like()
@@ -33,7 +31,7 @@ public class WallPostTest {
   }
 
   @Test
-  public void testDislike() {
+  void testDislike() {
     coolPost.dislike();
     assertEquals(3, coolPost.getLikes());
     coolPost.dislike().dislike();
@@ -45,12 +43,12 @@ public class WallPostTest {
   }
   
   @Test
-  public void testFeatured() {
+  void testFeatured() {
     assertFalse(wallPost.isFeatured());
   }
 
   @Test
-  public void testLike() {
+  void testLike() {
     assertEquals(0, wallPost.getLikes());
     wallPost.like();
     assertEquals(1, wallPost.getLikes());
@@ -62,7 +60,7 @@ public class WallPostTest {
   }
 
   @Test
-  public void testText() {
+  void testText() {
     final String hello = "Hello";
     wallPost.text(hello);
     assertEquals(hello, wallPost.getText());    
@@ -73,17 +71,14 @@ public class WallPostTest {
   }
   
   @Test
-  public void testToggleFeatured() {
+  void testToggleFeatured() {
     assertTrue(wallPost.toggleFeatured().isFeatured());
     assertFalse(coolPost.toggleFeatured().isFeatured());
   }
   
   @Test
-  public void testWallpost() {
+  void testWallpost() {
     assertEquals(0, wallPost.getLikes());
   }
   
 }
-
-        
-        

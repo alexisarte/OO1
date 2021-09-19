@@ -79,11 +79,7 @@ public class WallPostImpl implements WallPost {
 	* Retorna true si el post está marcado como destacado, false en caso contrario
 	*/
 	public boolean isFeatured() {
-		boolean exito = false;
-		if (this.featured == true) {
-			exito = true;
-		}
-		return exito;
+		return this.featured;
 	}
 	
 	/*
