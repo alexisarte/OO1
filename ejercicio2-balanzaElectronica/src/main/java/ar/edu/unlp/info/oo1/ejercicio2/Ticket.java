@@ -17,21 +17,17 @@ public class Ticket {
 	public double impuesto() {
 		return ((this.getPrecioTotal() * 21) / 100);
 	}
-
+	
+	
+	/** Getters */
+	
 	public LocalDate getFecha() {
 		return fecha;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
 	}
 	
 	public List<Producto> getProductos() {
 		return productos;
 	}
-	
-	
-	/** Getters */
 	
 	public int getCantidadDeProductos() {
 		return this.productos.size();
