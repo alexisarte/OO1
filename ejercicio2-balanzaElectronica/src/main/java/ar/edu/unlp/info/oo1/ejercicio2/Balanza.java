@@ -19,10 +19,7 @@ public class Balanza {
 	}
 
 	public Ticket emitirTicket() {
-		Ticket ticket1 = new Ticket();
-		ticket1.setCantidadDeProductos(this.getCantidadDeProductos());
-		ticket1.setPesoTotal(this.getPesoTotal());
-		ticket1.setPrecioTotal(this.getPrecioTotal());
+		Ticket ticket1 = new Ticket(this.getProductos());
 		return ticket1;
 	}
 
@@ -30,7 +27,7 @@ public class Balanza {
 	/** Getters */
 
 	public List<Producto> getProductos() {
-		return productos;
+		return (new ArrayList<Producto>(this.productos));
 	}
 
 	public int getCantidadDeProductos() {
