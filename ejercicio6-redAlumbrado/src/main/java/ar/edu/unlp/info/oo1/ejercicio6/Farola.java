@@ -22,8 +22,8 @@ public class Farola {
 	 * receptor del mensaje
 	 */
 	public void pairWithNeighbor(Farola otraFarola) {
-		otraFarola.getNeighbors().add(this);
-		this.neighbors.add(otraFarola);
+		otraFarola.agregarFarola(this);
+		this.agregarFarola(otraFarola);
 	}
 
 	/*
@@ -58,6 +58,10 @@ public class Farola {
 	 */
 	public boolean isOn() {
 		return estado;
+	}
+	
+	public void agregarFarola(Farola otraFarola) {
+		this.neighbors.add(otraFarola);
 	}
 
 }
