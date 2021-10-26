@@ -29,8 +29,7 @@ public class Email {
 	}
 	
 	public List<Archivo> adjuntos() {
-//		return new ArrayList<>(this.adjuntos);
-		return archivos;
+		return new ArrayList<>(this.archivos);
 	}
 
 	public String getTitulo() {
