@@ -30,7 +30,7 @@ public class Farola {
 	 * Retorna sus farolas vecinas
 	 */
 	public List<Farola> getNeighbors() {
-		return this.neighbors;
+		return new ArrayList<>(this.neighbors);
 	}
 
 	/*
