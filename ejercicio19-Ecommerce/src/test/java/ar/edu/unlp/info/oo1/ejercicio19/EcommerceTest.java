@@ -12,6 +12,8 @@ class EcommerceTest {
 	private Cliente cliente, cliente2;
 	private Producto producto, producto2;
 	private Pedido pedido;
+	private FormaDePago pago;
+	private MecanismoDeEnvio envio;
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -19,6 +21,9 @@ class EcommerceTest {
 		this.vendedor = this.ecommerce.registrarVendedor("Jose", "4321");
 		this.cliente = this.ecommerce.registrarCliente("Arturito", "1234");
 		this.producto = this.ecommerce.ponerProductoEnVenta("Monopoly", "Juego de Mesa", 25, 1000, vendedor);
+		this.pago = new PagoAlContado(producto);
+		this.envio = new RetirarEnComercio(vendedor, cliente);
+		this.pedido = this.ecommerce.crearPedido(cliente, producto, 50, pago, envio);
 	}
 
 	@Test
@@ -52,12 +57,20 @@ class EcommerceTest {
 	
 	@Test
 	void buscarProducto() {
-		assertEquals(this.producto, this.ecommerce.buscarProducto("Monopoly"));
+		var productos = this.ecommerce.buscarProducto("Monopoly");
+		assertTrue(productos.contains(producto));
 	}
 	
 	@Test
 	void crearPedido() {
-		assertEquals(this.producto, this.ecommerce.buscarProducto("Monopoly"));
+		assertTrue(this.cliente.getPedidos().contains(pedido));
+		var pedido2 = this.ecommerce.crearPedido(cliente, producto, 951, pago, envio);
+		assertFalse(this.cliente.getPedidos().contains(pedido2));
+	}
+	
+	@Test
+	void costoTotalDeUnPedido() {
+		assertEquals(this.producto.getPrecio(), this.ecommerce.costoTotalDeUnPedido(pedido));
 	}
 	
 }
