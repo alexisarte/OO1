@@ -1,5 +1,6 @@
 package ar.edu.unlp.info.oo1.ejercicio20_FarolasConFocos;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -7,14 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class FarolaTest {
+
 	private Farola farolaUno;
 	private Farola farolaDos;
 
 	@BeforeEach
 	void setUp() throws Exception {
-//		this.farolaUno = new Farola();
-//		this.farolaDos = new Farola();
-
+		this.farolaUno = new Farola("PHILIPS", 2);
+		this.farolaDos = new Farola("PHILIPS", 2);
 	}
 
 	@Test
@@ -49,4 +50,19 @@ public class FarolaTest {
 		assertFalse(farolaDos.isOn());
 
 	}
+	
+	@Test
+	void testFarolasConFocosVencidos() {
+		var farolaTres = new Farola("PHILIPS", 2);
+		farolaUno.pairWithNeighbor(farolaDos);
+		farolaDos.pairWithNeighbor(farolaTres);
+		farolaUno.turnOn();
+		farolaUno.turnOff();
+		farolaDos.turnOn();
+		var farolas = this.farolaUno.farolasConFocosVencidos();
+		assertTrue(farolas.contains(farolaUno));
+		assertTrue(farolas.contains(farolaDos));
+		assertTrue(farolas.contains(farolaTres));
+	}
+	
 }

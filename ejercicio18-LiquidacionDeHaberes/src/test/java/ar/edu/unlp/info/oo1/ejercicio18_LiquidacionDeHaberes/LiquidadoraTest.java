@@ -3,7 +3,6 @@ package ar.edu.unlp.info.oo1.ejercicio18_LiquidacionDeHaberes;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,20 +23,21 @@ class LiquidadoraTest {
 		this.liquidadora.cargarContratoPorHoras(empleado3, LocalDate.now().minusYears(10), LocalDate.now().minusYears(5), 10, 160);
 	}
 
-//	@Test
-//	void registrarEmpleado() {
-//		assertEquals(, this.liquidadora.getEmpleados().size());
-//	}
+	@Test
+	void registrarEmpleado() {
+		assertEquals(3, this.liquidadora.getEmpleados().size());
+	}
 	
 	@Test
 	void buscarEmpleado() {
 		assertEquals(this.empleado, this.liquidadora.buscarEmpleado("20123456789"));
 	}
 	
-//	@Test
-//	void eliminarEmpleado() {
-//		assertEquals(0, this.liquidadora.getEmpleados().size());
-//	}
+	@Test
+	void eliminarEmpleado() {
+		this.liquidadora.eliminarEmpleado(empleado);
+		assertFalse(this.liquidadora.getEmpleados().contains(empleado));
+	}
 	
 	@Test
 	void cargarContratoPorHoras() {
@@ -59,8 +59,7 @@ class LiquidadoraTest {
 	
 	@Test
 	void generarRecibos() {
-		assertEquals(2, this.liquidadora.generarRecibos().size());
+		assertEquals(2000, this.liquidadora.generarRecibos().get(0).getMontoTotal());
 	}
-	
 
 }

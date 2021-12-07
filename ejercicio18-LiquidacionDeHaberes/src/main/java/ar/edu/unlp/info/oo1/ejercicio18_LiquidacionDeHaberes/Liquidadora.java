@@ -48,7 +48,7 @@ public class Liquidadora {
 	}
 
 	public List<ReciboDeSueldo> generarRecibos() {
-		return this.empleados.stream().filter(e -> e.contratoActualVencido()).map(e -> e.generarRecibo()).collect(Collectors.toList());
+		return this.empleados.stream().filter(e -> !e.contratoActualVencido()).map(e -> e.generarRecibo()).collect(Collectors.toList());
 	}
 
 	public List<Empleado> getEmpleados() {

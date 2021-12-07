@@ -15,10 +15,18 @@ public class ContratoPorHoras extends Contrato {
 		this.horas = horas;
 	}
 
-	public double montoACobrar() {
-		return 0;
+	public double montoBasico() {
+		return this.getValorHora() * this.getHoras();
 	}
-
+	
+	@Override
+	protected boolean estaVencido() {
+		if (this.getFechaFin().compareTo(LocalDate.now()) > 0) {
+			return false;
+		} 
+		return true;
+	}
+	
 	public LocalDate getFechaFin() {
 		return fechaFin;
 	}
@@ -29,14 +37,6 @@ public class ContratoPorHoras extends Contrato {
 
 	public int getHoras() {
 		return horas;
-	}
-
-	@Override
-	protected boolean estaVencido() {
-		if (this.getFechaFin().compareTo(LocalDate.now()) > 0) {
-			return false;
-		} 
-		return true;
 	}
 	
 }

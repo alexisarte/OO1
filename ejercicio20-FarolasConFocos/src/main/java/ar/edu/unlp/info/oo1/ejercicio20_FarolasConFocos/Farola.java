@@ -1,6 +1,8 @@
 package ar.edu.unlp.info.oo1.ejercicio20_FarolasConFocos;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Farola {
 
@@ -12,8 +14,7 @@ public class Farola {
 	 * Crear una farola que posee un foco fabricado por fabricante con cantidad de
 	 * ciclos el valor de cantidadDeCiclos. Debe inicializarla como apagada
 	 */
-
-	public Farola (String fabricante, int cantidadDeCiclos) {
+	public Farola(String fabricante, int cantidadDeCiclos) {
 		this.neighbors = new ArrayList<>();
 		this.estado = false;
 		this.foco = new Foco(fabricante, cantidadDeCiclos);
@@ -26,8 +27,8 @@ public class Farola {
 	 * receptor del mensaje
 	 */
 	public void pairWithNeighbor(Farola otraFarola) {
-		otraFarola.agregarFarola(this);
-		this.agregarFarola(otraFarola);
+		otraFarola.addNeighbor(this);
+		this.addNeighbor(otraFarola);
 	}
 
 	/*
@@ -38,13 +39,15 @@ public class Farola {
 	}
 
 	/*
-	 * Si la farola no está encendida, la enciende y propaga la acción.
+	 * Si la farola no está encendida, la enciende, contabiliza el ciclo de
+	 * encendido y propaga la acción.
 	 */
+
 	public void turnOn() {
-		if (!this.isOn()) {
+		if (!this.isOn() && !this.foco.estaVencido()) {
 			this.estado = true;
-			this.neighbors.stream().forEach(Farola -> Farola.turnOn());
-			;
+			this.foco.descontarCantidadDeCiclos();
+			this.neighbors.stream().forEach(f -> f.turnOn());
 		}
 	}
 
@@ -54,7 +57,7 @@ public class Farola {
 	public void turnOff() {
 		if (this.isOn()) {
 			this.estado = false;
-			this.neighbors.stream().forEach(Farola -> Farola.turnOff());
+			this.neighbors.stream().forEach(f -> f.turnOff());
 		}
 	}
 
@@ -64,8 +67,23 @@ public class Farola {
 	public boolean isOn() {
 		return estado;
 	}
-
-	public void agregarFarola(Farola otraFarola) {
+	
+	/*
+	 * Retorna una lista con las farolas que están en la red de la farola receptora
+	 * y que poseen focos vencidos. Incluyendo el chequeo entre las farolas vecinas
+	 * y las vecinas de estas propagando en toda la red.
+	 */
+	public List<Farola> farolasConFocosVencidos() {
+		List<Farola> farolas = new ArrayList<Farola>();
+		if (this.isOn() && this.foco.estaVencido()) {
+			this.estado = false;
+			farolas = this.neighbors.stream().flatMap(n -> n.farolasConFocosVencidos().stream()).collect(Collectors.toList());
+			farolas.add(this);
+		}
+		return farolas;
+	}
+	
+	public void addNeighbor(Farola otraFarola) {
 		this.neighbors.add(otraFarola);
 	}
 
