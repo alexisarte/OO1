@@ -8,8 +8,8 @@ public class ContratoPorHoras extends Contrato {
 	private double valorHora;
 	private int horas;
 	
-	public ContratoPorHoras(LocalDate fechaInicio, LocalDate fechaFin, double valorHora, int horas) {
-		super(fechaInicio);
+	public ContratoPorHoras(Empleado empleado, LocalDate fechaInicio, LocalDate fechaFin, double valorHora, int horas) {
+		super(empleado, fechaInicio);
 		this.fechaFin = fechaFin;
 		this.valorHora = valorHora;
 		this.horas = horas;

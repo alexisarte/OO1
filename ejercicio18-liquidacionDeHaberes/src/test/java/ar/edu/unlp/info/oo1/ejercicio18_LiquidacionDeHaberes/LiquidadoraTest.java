@@ -14,9 +14,9 @@ class LiquidadoraTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		this.liquidadora = new Liquidadora();
-		this.empleado = this.liquidadora.registrarEmpleado("Juan", "Perez", "20123456789", LocalDate.now(), false, false);
+		this.empleado = this.liquidadora.registrarEmpleado("Juan", "Perez", "20123456789", LocalDate.now(), true, true);
 		this.empleado2 = this.liquidadora.registrarEmpleado("John", "Doe", "20123456788", LocalDate.now(), true, false);
-		this.empleado3 = this.liquidadora.registrarEmpleado("Maria", "Doe", "20123456787", LocalDate.now(), true, true);
+		this.empleado3 = this.liquidadora.registrarEmpleado("Maria", "Doe", "20123456787", LocalDate.now(), false, false);
 		this.liquidadora.cargarContratoPorHoras(empleado, LocalDate.now().minusMonths(11), LocalDate.now(), 10, 160);
 		this.liquidadora.cargarContratoDePlanta(empleado, LocalDate.now(), 2000, 10, 10);		
 		this.liquidadora.cargarContratoPorHoras(empleado2, LocalDate.now().minusYears(8), LocalDate.now().minusYears(3), 10, 160);
@@ -59,7 +59,7 @@ class LiquidadoraTest {
 	
 	@Test
 	void generarRecibos() {
-		assertEquals(2000, this.liquidadora.generarRecibos().get(0).getMontoTotal());
+		assertEquals(2020, this.liquidadora.generarRecibos().get(0).getMontoTotal());
 	}
 
 }

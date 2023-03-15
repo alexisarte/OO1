@@ -31,14 +31,14 @@ public class Liquidadora {
 
 	public Contrato cargarContratoPorHoras(Empleado empleado, LocalDate fechaInicio, LocalDate fechaFin,
 			double valorHora, int horas) {
-		Contrato contrato = new ContratoPorHoras(fechaInicio, fechaFin, valorHora, horas);
+		Contrato contrato = new ContratoPorHoras(empleado, fechaInicio, fechaFin, valorHora, horas);
 		empleado.agregarContrato(contrato);
 		return contrato ;
 	}
 
 	public Contrato cargarContratoDePlanta(Empleado empleado, LocalDate fechaInicio, double sueldo, double montoConyuge,
 			double montoHijos) {
-		Contrato contrato = new ContratoDePlanta(fechaInicio, sueldo, montoConyuge, montoHijos);
+		Contrato contrato = new ContratoDePlanta(empleado, fechaInicio, sueldo, montoConyuge, montoHijos);
 		empleado.agregarContrato(contrato);
 		return contrato;
 	}
@@ -48,7 +48,7 @@ public class Liquidadora {
 	}
 
 	public List<ReciboDeSueldo> generarRecibos() {
-		return this.empleados.stream().filter(e -> !e.contratoActualVencido()).map(e -> e.generarRecibo()).collect(Collectors.toList());
+		return this.empleados.stream().filter(e -> e.contratoActualVencido() == false).map(e -> e.generarRecibo()).collect(Collectors.toList());
 	}
 
 	public List<Empleado> getEmpleados() {

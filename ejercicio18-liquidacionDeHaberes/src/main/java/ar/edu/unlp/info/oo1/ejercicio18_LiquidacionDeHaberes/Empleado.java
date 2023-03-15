@@ -92,7 +92,7 @@ public class Empleado {
 		return (this.antiguedad() == 5) ? 0.3 * this.montoBasico()
 				: (this.antiguedad() == 10) ? 0.5 * this.montoBasico()
 						: (this.antiguedad() == 15) ? 0.7 * this.montoBasico()
-								: (this.antiguedad() == 20) ? this.montoBasico() : 0;
+								: (this.antiguedad() == 20) ? this.montoBasico() : 1;
 	}
 
 	public ReciboDeSueldo generarRecibo() {

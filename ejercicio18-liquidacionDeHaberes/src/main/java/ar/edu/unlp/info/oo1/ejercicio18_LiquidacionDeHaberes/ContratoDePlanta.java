@@ -17,11 +17,14 @@ public class ContratoDePlanta extends Contrato {
 
 	@Override
 	public double montoBasico() {
-		var monto = 0;
+		double monto = this.getSueldo();
 		if (this.getEmpleado().isTieneConyuge()) {
-			monto = this.fetmontoConyuge() + this.montoHijos
+			monto += this.getMontoConyuge();
 		}
-		return this.getEmpleado().tieneContrato() ;
+		if (this.getEmpleado().isTieneHijos()) {
+			monto += this.getMontoHijos();
+		}
+		return monto;
 	}
 	
 	@Override
